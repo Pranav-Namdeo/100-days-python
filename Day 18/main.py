@@ -1,23 +1,19 @@
 from turtle import Turtle, Screen
+import random
 timmy = Turtle()
 timmy.shape("turtle")
 
-shape_data = [
-    {"angle" : "3", "color" :"red"},
-    {"angle" : "4", "color" :"blue"},
-    {"angle" : "5", "color" :"green"},
-    {"angle" : "6", "color" :"yellow"},
-    {"angle" : "7", "color" :"purple"},
-    {"angle" : "8", "color" :"orange"},
-    {"angle" : "9", "color" :"pink"},
-    {"angle" : "10", "color" :"brown"}
-]
-
-for shape in shape_data:
-    timmy.color(shape["color"])
-    for _ in range(0, int(shape["angle"])):
+colors = ["red", "blue", "green", "yellow", "purple", "orange", "pink", "brown"]
+def draw_shape(num_sides):
+    angle = 360/num_sides
+    for x in range(num_sides):
         timmy.forward(100)
-        timmy.right(float(360/float(shape["angle"])))
+        timmy.right(angle)
+
+for sides in range(3, 11):
+    timmy.color(random.choice(colors))
+    draw_shape(sides)
+
 
 
 screen = Screen()
