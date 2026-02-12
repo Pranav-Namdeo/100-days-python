@@ -2,17 +2,15 @@ from turtle import Turtle, Screen
 import random
 timmy = Turtle()
 timmy.shape("turtle")
+timmy.pensize(5)
+timmy.speed("fastest")
+colors = ["Red", "Blue", "Green", "Yellow", "Orange", "Purple", "Pink", "Brown", "Black", "Gray", "Cyan", "Magenta", "Lime", "Maroon", "Navy", "Olive", "Teal", "Coral", "Turquoise", "Indigo", "Violet", "Gold", "Silver", "Beige", "Lavender", "Salmon", "Chocolate", "Crimson", "DarkBlue", "DarkGreen"]
+directions = [0, 90, 180, 270]
 
-colors = ["red", "blue", "green", "yellow", "purple", "orange", "pink", "brown"]
-def draw_shape(num_sides):
-    angle = 360/num_sides
-    for x in range(num_sides):
-        timmy.forward(100)
-        timmy.right(angle)
-
-for sides in range(3, 11):
+for x in range(1000):
     timmy.color(random.choice(colors))
-    draw_shape(sides)
+    timmy.setheading(random.choice(directions))
+    timmy.forward(20)
 
 
 
