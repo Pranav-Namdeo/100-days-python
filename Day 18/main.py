@@ -2,7 +2,7 @@ from turtle import Turtle, Screen, colormode
 import random
 timmy = Turtle()
 timmy.shape("turtle")
-timmy.pensize(5)
+timmy.pensize(2)
 timmy.speed("fastest")
 
 colormode(255)
@@ -13,14 +13,10 @@ def random_color():
     random_color = (r, g, b)
     return random_color
 
-directions = [0, 90, 180, 270]
-
-for x in range(1000):
+for x in range(0, 360, 10):
     timmy.color(random_color())
-    timmy.setheading(random.choice(directions))
-    timmy.forward(20)
-
-
+    timmy.setheading(x)
+    timmy.circle(100)
 
 
 
