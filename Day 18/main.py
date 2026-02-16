@@ -4,7 +4,7 @@ timmy = Turtle()
 timmy.shape("turtle")
 timmy.pensize(2)
 timmy.speed("fastest")
-
+timmy.hideturtle()
 colormode(255)
 def random_color():
     r = random.randint(0, 255)
