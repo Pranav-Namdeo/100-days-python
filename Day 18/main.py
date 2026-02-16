@@ -13,10 +13,17 @@ def random_color():
     random_color = (r, g, b)
     return random_color
 
-for x in range(0, 360, 10):
-    timmy.color(random_color())
-    timmy.setheading(x)
-    timmy.circle(100)
+def draw_dots(x, y):
+    for _ in range(10):
+        for _ in range(10):
+            timmy.teleport(x, y)
+            timmy.dot(20, random_color())
+            x += 40
+        x = -200
+        y += 40
+
+draw_dots(-200, -200)
+
 
 
 
