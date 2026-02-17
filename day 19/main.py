@@ -1,26 +1,36 @@
 from turtle import Turtle, Screen
-tim = Turtle()
+import random
+
+is_race_on = False
 screen = Screen()
-tim.shape("turtle")
-def move_forward():
-    tim.fd(10)
-def move_backward():
-    tim.bk(10)
-def turn_left():
-    tim.left(10)
-def turn_right():
-    tim.right(10)
-def clear_screen():
-    tim.reset()
+screen.setup(width=500, height=400)
+user_bet = screen.textinput(title="Make your bet", prompt= "which turtle will win the race? Enter a color: ")
+colors = ["red", "orange", "yellow", "green", "blue", "purple"]
+y = [-70, -40, -10, 20, 50, 80]
+turtle_list = []
 
+for turtle_x in range(6):
+    tim = Turtle(shape= "turtle")
+    tim.penup()
+    tim.color(colors[turtle_x])
+    tim.setposition(x=-230, y= y[turtle_x])
+    turtle_list.append(tim)
 
-screen.listen()
-screen.onkey(key= "w", fun= move_forward)
-screen.onkey(key= "s", fun= move_backward)
-screen.onkey(key= "a", fun= turn_left)
-screen.onkey(key= "d", fun= turn_right)
-screen.onkey(key= "c", fun= clear_screen)
+if user_bet:
+    is_race_on = True
 
+while is_race_on:
+    for turtle in turtle_list:
+        distance = random.randint(0, 10)
+        turtle.fd(distance)
+        if turtle.xcor() > 230:
+            is_race_on = False
+            winner_color = turtle.pencolor()
+            if winner_color == user_bet:
+                print(f"You've won! The {winner_color} turtle is the winner!")
+            else:
+                print(f"You've lost! The {winner_color} turtle is the winner!")
+                
 
 
 
