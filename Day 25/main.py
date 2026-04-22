@@ -21,10 +21,24 @@ import pandas
 #print(monday_temp)
 
 # create a dataframe from scratch
+#data_dict = {
+#    "students": ["Amy", "James", "Angela"],
+#    "scores": [76, 56, 65]
+#}
+#data = pandas.DataFrame(data_dict)
+#print(data)
+#data.to_csv("./day 25/new_data.csv")
+
+
+data = pandas.read_csv("./day 25/Squirrel_Data.csv")
+gray_squirrels_count = len(data[data["Primary Fur Color"] == "Gray"])
+red_squirrels_count = len(data[data["Primary Fur Color"] == "Cinnamon"])
+black_squirrels_count = len(data[data["Primary Fur Color"] == "Black"])
+
 data_dict = {
-    "students": ["Amy", "James", "Angela"],
-    "scores": [76, 56, 65]
+    "Fur Color": ["Gray", "Cinnamon", "Black"],
+    "Count": [gray_squirrels_count, red_squirrels_count, black_squirrels_count]
 }
-data = pandas.DataFrame(data_dict)
-print(data)
-data.to_csv("./day 25/new_data.csv")
+squirrels_data = pandas.DataFrame(data_dict)
+squirrels_data.to_csv("./day 25/squirrels_count.csv")
+print(squirrels_data)
