@@ -21,3 +21,9 @@ while correct_number < 50:
         if answer_state == state.lower() and state not in correct_states:
             correct_number += 1
             correct_states.append(state)
+            t = turtle.Turtle()
+            t.hideturtle()
+            t.penup()
+            state_data = data[data.state == state]
+            t.goto(int(state_data.x.iloc[0]), int(state_data.y.iloc[0]))
+            t.write(state)
