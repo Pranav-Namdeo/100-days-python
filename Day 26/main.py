@@ -1,3 +1,4 @@
+import random
 numbers = [1, 2, 3, 4, 5]
 squared_numbers = [n ** 2 for n in numbers]
 
@@ -9,4 +10,6 @@ print(double_no)
 
 names = ["Peter", "Paul", "Mary", "John", "Jane", "Jack", "Jill", "James", "Jenny", "Joe"]
 short_names = [n.upper() for n in names if len(n) < 5]
-print(short_names)
+
+name_score = {n: random.randint(1, 100) for n in names}
+print(name_score)
