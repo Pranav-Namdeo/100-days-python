@@ -16,10 +16,7 @@ while correct_number < 50:
     answer_state = screen.textinput(title=f"{correct_number}/50 States Correct", prompt="What's another state's name?").lower()
     
     if answer_state == "exit":
-        left_states = []
-        for state in state_list:
-            if state not in correct_states:
-                left_states.append(state)
+        left_states = [state for state in state_list if state not in correct_states]
         new_data = pandas.DataFrame(left_states)
         new_data.to_csv("./day 25/Us state game/states_to_learn.csv")
         print("You can find the states you missed in the states_to_learn.csv file.")
