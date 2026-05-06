@@ -11,8 +11,10 @@ my_label.pack()
 my_label["text"] = "New Text"
 
 #button
+def action():
+    my_label["text"] = "I got clicked"
 
-button = Button(text="Click me")
+button = Button(text="Click me", command=action)
 button.pack()
 
 
