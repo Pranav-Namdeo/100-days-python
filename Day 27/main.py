@@ -12,13 +12,16 @@ my_label["text"] = "New Text"
 
 #button
 def action():
-    my_label["text"] = "I got clicked"
+    my_label["text"] = input.get()
 
 button = Button(text="Click me", command=action)
 button.pack()
 
 
+#input
 
+input = Entry()
+input.pack()
 
 
 window.mainloop()
