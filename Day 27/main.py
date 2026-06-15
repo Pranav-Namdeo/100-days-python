@@ -2,26 +2,33 @@ from tkinter import *
 
 window = Tk()
 window.title("Meow")
-window.minsize(width=600, height=400)
 
 #Label
-my_label = Label(text="I am a label", font=("Arial", 24, "bold"))
-my_label.pack()
+miles_label = Label(text="Miles")
+miles_label.grid(column=2, row=0)
 
-my_label["text"] = "New Text"
+equal_label = Label(text="is equal to")
+equal_label.grid(column=0, row=1)
+
+zero_label = Label(text="0")
+zero_label.grid(column=1, row=1)
+
+km_label = Label(text="Km")
+km_label.grid(column=2, row=1)
 
 #button
 def action():
-    my_label["text"] = input.get()
+    miles = miles_input.get()
+    km = float(miles) * 1.609
+    zero_label.config(text=km)
 
-button = Button(text="Click me", command=action)
-button.pack()
-
+calculate_button = Button(text="Calculate", command=action)
+calculate_button.grid(column=1, row=3)
 
 #input
 
-input = Entry()
-input.pack()
+miles_input = Entry()
+miles_input.grid(column=1, row=0)
 
 
 window.mainloop()
