@@ -2,6 +2,7 @@ from tkinter import *
 
 window = Tk()
 window.title("Meow")
+window.config(padx=20, pady=20)
 
 #Label
 miles_label = Label(text="Miles")
