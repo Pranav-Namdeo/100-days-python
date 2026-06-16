@@ -1,5 +1,6 @@
 from tkinter import *
 import math
+
 # ---------------------------- CONSTANTS ------------------------------- #
 PINK = "#e2979c"
 RED = "#e7305b"
@@ -7,10 +8,20 @@ GREEN = "#9bdeac"
 YELLOW = "#f7f5dd"
 FONT_NAME = "Courier"
 WORK_MIN = 1
-SHORT_BREAK_MIN = 5
+SHORT_BREAK_MIN = 1
 LONG_BREAK_MIN = 20
 reps = 0
+timer = None
+
 # ---------------------------- TIMER RESET ------------------------------- # 
+
+def reset_timer():
+    global reps
+    window.after_cancel(timer)
+    canvas.itemconfig(timer_text, text="00:00")
+    timer_label.config(text="Timer")
+    ticks_label.config(text="")
+    reps = 0
 
 # ---------------------------- TIMER MECHANISM ------------------------------- # 
 def start_timer():
@@ -39,9 +50,13 @@ def count_down(count):
 
     canvas.itemconfig(timer_text, text=f"{count_min}:{count_sec}")
     if count > 0:
-        window.after(1000, count_down, count -1)
+        global timer
+        timer = window.after(1000, count_down, count -1)
     else:
         start_timer()
+        if reps % 2 == 0:
+            ticks_label.config(text="✔" * (reps // 2))
+
 # ---------------------------- UI SETUP ------------------------------- #
 window = Tk()
 window.title("Pomodoro")
@@ -59,10 +74,10 @@ timer_label.grid(column=1, row=0)
 start_button = Button(text="Start", command=start_timer)
 start_button.grid(column=0, row =2)
 
-reset_button = Button(text="Reset")
+reset_button = Button(text="Reset", command=reset_timer)
 reset_button.grid(column=2, row=2)
 
-ticks_label = Label(text="✔", fg=GREEN, bg=YELLOW, font=(FONT_NAME, 20))
+ticks_label = Label(fg=GREEN, bg=YELLOW, font=(FONT_NAME, 20))
 ticks_label.grid(column=1, row=3)
 
 
