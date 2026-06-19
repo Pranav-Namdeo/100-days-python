@@ -40,8 +40,12 @@ def save():
         messagebox.showinfo(title="Oops", message="Please make sure you haven't left any fields empty.")
 
     else:
+        with open(".\day 30\Password\data.json", "r") as data_file:
+            data = json.load(data_file)
+            data.update(new_data)
+
         with open(".\day 30\Password\data.json", "w") as data_file:
-            json.dump(new_data, data_file, indent=4)
+            json.dump(data, data_file, indent=4)
             website_entry.delete(0, END)
             password_entry.delete(0, END)
 
