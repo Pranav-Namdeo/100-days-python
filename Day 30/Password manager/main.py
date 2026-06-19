@@ -40,12 +40,20 @@ def save():
         messagebox.showinfo(title="Oops", message="Please make sure you haven't left any fields empty.")
 
     else:
-        with open(".\day 30\Password\data.json", "r") as data_file:
-            data = json.load(data_file)
-            data.update(new_data)
+        try:
+            with open(".\day 30\Password\data.json", "r") as data_file:
+                data = json.load(data_file)
 
-        with open(".\day 30\Password\data.json", "w") as data_file:
-            json.dump(data, data_file, indent=4)
+        except FileNotFoundError:
+            with open(".\day 30\Password\data.json", "w") as data_file:
+                json.dump(new_data, data_file, indent=4)
+        
+        else:
+            data.update(new_data)
+            with open(".\day 30\Password\data.json", "w") as data_file:
+                json.dump(data, data_file, indent=4)
+
+        finally:
             website_entry.delete(0, END)
             password_entry.delete(0, END)
 
@@ -56,7 +64,7 @@ window.title("Password Manager")
 window.config(padx=50, pady=50)
 
 canvas = Canvas(width=200, height=200)
-logo_img = PhotoImage(file=".\day 29\logo.png")
+logo_img = PhotoImage(file=".\day 30\Password\logo.png")
 canvas.create_image(100, 100, image=logo_img)
 canvas.grid(column=1, row=0)
 
