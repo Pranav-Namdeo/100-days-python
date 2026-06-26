@@ -40,16 +40,15 @@ def is_night():
         return True
 
 #If the ISS is close to my current position
-if is_iss_overhead():
+# and it is currently dark
 
-    # and it is currently dark
-    if is_night():
-
-        # Then send me an email to tell me to look up.
-        with smtplib.SMTP("smtp.gmail.com") as connection:
-            connection.starttls()
-            connection.login(user= my_email, password= password)
-            connection.sendmail(from_addr= my_email, to_addrs= "anaynamdeo18@gmail.com", msg="Subject=ISS Overhead\n\nlook up.")
+if is_iss_overhead() and is_night():
+    # Then send me an email to tell me to look up.
+    with smtplib.SMTP("smtp.gmail.com") as connection:
+        connection.sendmail(from_addr= my_email, to_addrs= "anaynamdeo18@gmail.com", msg="Subject=ISS Overhead\n\nlook up.")
+        connection.starttls()
+        connection.login(user= my_email, password= password)
+        
 # BONUS: run the code every 60 seconds.
 
 
