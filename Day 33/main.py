@@ -1,17 +1,24 @@
 import requests
 from datetime import datetime
+import smtplib
 
-MY_LAT = 51.507351 # Your latitude
-MY_LONG = -0.127758 # Your longitude
+MY_LAT = 23.1701522
+MY_LONG = 79.9324505
 
-response = requests.get(url="http://api.open-notify.org/iss-now.json")
-response.raise_for_status()
-data = response.json()
+my_email = "kiromaster0@gmail.com"
+password = "xznn lwhd hffh eizz"
 
-iss_latitude = float(data["iss_position"]["latitude"])
-iss_longitude = float(data["iss_position"]["longitude"])
+def is_iss_overhead():
+    response = requests.get(url="http://api.open-notify.org/iss-now.json")
+    response.raise_for_status()
+    data = response.json()
 
-#Your position is within +5 or -5 degrees of the ISS position.
+    iss_latitude = float(data["iss_position"]["latitude"])
+    iss_longitude = float(data["iss_position"]["longitude"])
+
+    #Your position is within +5 or -5 degrees of the ISS position.
+    if MY_LAT-5 <= iss_latitude <= MY_LAT+5 and MY_LONG-5 <= iss_longitude <= MY_LONG+5:
+        return True
 
 
 parameters = {
@@ -20,17 +27,29 @@ parameters = {
     "formatted": 0,
 }
 
-response = requests.get("https://api.sunrise-sunset.org/json", params=parameters)
-response.raise_for_status()
-data = response.json()
-sunrise = int(data["results"]["sunrise"].split("T")[1].split(":")[0])
-sunset = int(data["results"]["sunset"].split("T")[1].split(":")[0])
+def is_night():
+    response = requests.get("https://api.sunrise-sunset.org/json", params=parameters)
+    response.raise_for_status()
+    data = response.json()
+    sunrise = int(data["results"]["sunrise"].split("T")[1].split(":")[0])
+    sunset = int(data["results"]["sunset"].split("T")[1].split(":")[0])
 
-time_now = datetime.now()
+    time_now = datetime.now().hour
+
+    if sunset < time_now < sunrise:
+        return True
 
 #If the ISS is close to my current position
-# and it is currently dark
-# Then send me an email to tell me to look up.
+if is_iss_overhead():
+
+    # and it is currently dark
+    if is_night():
+
+        # Then send me an email to tell me to look up.
+        with smtplib.SMTP("smtp.gmail.com") as connection:
+            connection.starttls()
+            connection.login(user= my_email, password= password)
+            connection.sendmail(from_addr= my_email, to_addrs= "anaynamdeo18@gmail.com", msg="Subject=ISS Overhead\n\nlook up.")
 # BONUS: run the code every 60 seconds.
 
 
